@@ -114,7 +114,7 @@ nav h1 [class*='fa-'] {
 }
 
 nav a {
-  color: white;
+  color: var(--cream);
   text-decoration: none;
   display: block;
 }
