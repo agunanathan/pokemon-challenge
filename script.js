@@ -6,6 +6,7 @@ let fiftyFiftyCount = 0
 let askTheAudienceCount = 0
 let choicesCounter = 0
 let pokemonName = 'x'
+let timer = '60s'
 let choicesArray = ['a', 'b', 'c', 'd']
 const pokemonNameArray = [
   'bulbasaur',
@@ -175,6 +176,10 @@ function initializeQuiz() {
   }
 }
 async function generateQuiz(button) {
+  document.getElementById('score').innerHTML = 'Score: ' + score
+  document.getElementById('lives').innerHTML = 'Lives: ' + lives
+  document.getElementById('lifeline').innerHTML = 'Lifeline: ' + lifeLine
+  document.getElementById('timer').innerHTML = 'Timer: ' + timer
   document.getElementById('message-board').innerHTML = ''
   document.getElementById('generate-quiz-button').setAttribute('disabled', '')
   choicesCounter = 0
@@ -229,7 +234,7 @@ function checkAnswer(button) {
     document.getElementById('generate-quiz-button').removeAttribute('disabled')
     document.getElementById('message-board').innerText =
       'correct answer :' + pokemonName
-    score = score + 1
+    score += 1
     document.getElementById('score').innerHTML = 'Score: ' + score
     for (let i = 0; i < 5; i++) {
       let element = document.getElementById(i)
@@ -238,7 +243,7 @@ function checkAnswer(button) {
       }
     }
   } else {
-    lives = lives - 1
+    lives -= 1
     document.getElementById('lives').innerHTML = 'Lives: ' + lives
     button.setAttribute('disabled', '')
     if (lives === 0) {
@@ -254,6 +259,17 @@ function checkAnswer(button) {
       if (lives < 1) {
         document.getElementById('message-board').innerText =
           'wrong answer, correct answer is: ' + pokemonName
+        document.getElementById('generate-quiz-button').innerHTML = 'Replay'
+        lives = 3
+        lifeLine = 3
+        score = 0
+        phoneAFriendCount = 0
+        fiftyFiftyCount = 0
+        askTheAudienceCount = 0
+        choicesCounter = 0
+        document
+          .getElementById('generate-quiz-button')
+          .removeAttribute('disabled')
       }
       document.getElementById('ask-a-friend').setAttribute('disabled', '')
       document.getElementById('fifty-fifty').setAttribute('disabled', '')
